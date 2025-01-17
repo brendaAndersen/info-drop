@@ -1,0 +1,79 @@
+.comment {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+}
+@media(max-width: 768px){
+    .commentContent{
+      max-width: 40%;
+    } 
+    /* footer{
+        max-width: 10%;
+
+    }
+    .commentBox{
+        width: 300px;
+    } */
+} 
+.comment > img {
+    width: calc(3rem + 12px);
+    height: calc(3rem + 12px);
+    border-radius: 8px;
+    border: 4px solid var(--gray-800);
+    outline: 2px solid var(--gray-500);
+}
+
+.commentBox {
+    flex: 1;
+}
+
+.commentContent {
+    background: var(--gray-700);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 10px;
+    width: 40rem;
+}
+
+.commentContent header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.author strong {
+    display: block;
+    font-size: 0.875rem;
+    line-height: 1.6;
+}
+button span {
+    padding: 5px;
+} 
+button {
+    cursor: pointer;
+}
+.delete {
+    background: transparent;
+    border: 0;
+    color: var(--red-500);
+    display: flex;
+    align-items: center;
+    border-radius: 2px;
+  }
+.handsClapping {
+    color: var(--green-300);
+    background: transparent;
+    border: transparent;
+    align-items: center;
+    display: flex;
+}
+.delete:hover {
+color: var(--red-400);
+}
+.commentBox footer button svg {
+margin-right: 0.5rem;
+}
+.handsClapping span {
+    color: var(--green-300);
+}
