@@ -1,9 +1,19 @@
-import React from "react"
+import React, { useState } from "react"
 import styles from "./Comment.module.css"
 import { HandsClapping, Trash } from "phosphor-react"
 import { Avatar } from "../avatar"
 
-export function Comment(){
+export function Comment({ comment, onDeleteComment }){
+    const [likeCount, setLikeCount] = useState(0);
+
+    function handleDelete(){
+        onDeleteComment(comment)
+    }
+    
+    function handleLikeComment(){
+        setLikeCount(likeCount + 1);
+    }
+
     return (
         <div className={styles.comment}>
             <Avatar src="https://github.com/brendaAndersen.png" />
@@ -13,17 +23,18 @@ export function Comment(){
                         <div className={styles.author}>
                             <strong>Brenda Andersen</strong>
                         </div>
-                        <button title="Deletar" className={styles.delete}>
+                        <button title="Deletar" className={styles.delete} onClick={handleDelete}>
                             <Trash size={20} />
                         </button>
                     </header>
-                    <p>Exemplo de comentário.</p>
+                    <p>{comment}</p>
                 </div>
                 <footer>
-                    <button className={styles.handsClapping}>
+                    <button className={styles.handsClapping} onClick={handleLikeComment}>
                         <HandsClapping />
-                        <span>
                             Aplaudir
+                        <span>
+                            {likeCount}
                         </span>
                     </button>
                 </footer>

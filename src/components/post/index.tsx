@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styles  from "./Post.module.css"
-import { GithubLogo, Link } from "phosphor-react";
+import { Link } from "phosphor-react";
 import { Comment } from "../comment";
 import { Avatar } from "../avatar";
 
@@ -11,12 +11,42 @@ type PostProps = {
     type: string
     image: string
     author: string
+    comment: []
     tags: []
 }
 
-export function Post({ title, content, tags, link, type, author,image } : PostProps){
+
+export function Post({ title, content, tags, link, type, author, image, comment } : PostProps){
+    const [comments, setComments] = useState<any>([
+        comment,
+    ]);
+    const [newComment, setNewCommentText] = useState('');
+    const [show, setShow] = useState(false);
+
+    function handleSubmit(event) {
+        event.preventDefault()
+
+        setComments([...comments, newComment]);
+        setNewCommentText('');
+        setShow(!show)
+    }
+    function handleNewCommentChange(event) {
+        setNewCommentText(event?.target?.value);
+        event.target.setCustomValidity('');
+    }
+    function deleteComment(commentToDelete:any){
+        setShow(!show)
+        const finalListComments = comments.filter(comment => {
+            return comment !== commentToDelete;
+        })
+        setComments(finalListComments);
+
+    }
+    function handleNewCommentInvalid(event){
+        event.target.setCustomValidity('Esse campo é obrigatório');
+    }
     return (
-        <article className={styles.post}>
+        <article className={styles.post }>
             <header>
                 <div className={styles.author}>
                     <Avatar src={image} />
@@ -25,7 +55,6 @@ export function Post({ title, content, tags, link, type, author,image } : PostPr
                         <p>Web developer</p>
                     </div>
                 </div>
-                {/* <time>{new Date().getFullYear()}</time> */}
                 <time>{type}</time>
             </header>
             <div className={styles.content}>
@@ -45,15 +74,24 @@ export function Post({ title, content, tags, link, type, author,image } : PostPr
                 ))}
                 </p>
             </div>
-            <form className={styles.commentForm}>
+            <form onSubmit={handleSubmit} className={styles.commentForm}>
                 <strong>Deixe seu feedback</strong>
-                <textarea placeholder="Deixe um comentário"></textarea>
-                <footer>
-                    <button type="submit">Postar</button>
+                <textarea placeholder="Deixe um comentário"
+                required
+                onInvalid={handleNewCommentInvalid}
+                onChange={handleNewCommentChange}
+                value={newComment}
+                ></textarea>
+                <footer className={"commentFormFocus"}>
+                    <button type="submit" >Postar</button>
                 </footer>
             </form>
             <div className={styles.commentList}>
-                <Comment />
+                {
+                    comments.map((comment, index) => {
+                        return comment.length !== 0 && <Comment key={index} comment={comment} onDeleteComment={deleteComment}/>
+                    })
+                }
             </div>
         </article>
     )

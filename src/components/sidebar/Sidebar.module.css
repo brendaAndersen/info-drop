@@ -1,3 +1,4 @@
+
 .sidebar {
     background: var(--gray-800);
     border-radius: 8px;
@@ -7,6 +8,9 @@
     .sidebar{
       max-width: 50%;
     } 
+    time {
+        visibility: hidden;
+    }
 }
 .image {
     width: 100%;
@@ -48,7 +52,7 @@ span {
     width: 100%;
     background: transparent;
     color: var(--violet-300);
-
+    
     border: 1px solid var(--violet-300);
     border-radius: 8px;
     height: 50px;
@@ -62,6 +66,11 @@ span {
     gap: 0.80rem;
     transition: color 0.2s, background-color 0.2s;
     cursor: pointer;
+}
+@media(max-width: 768px){
+    .button{
+        justify-content: center;
+    }
 }
 .button:hover {
     background: var(--violet-300);

@@ -68,6 +68,25 @@
     gap: 0.80rem;
     transition: color 0.2s, background-color 0.2s;
     cursor: pointer;
+    ._button_g6990_46 {
+        font-size: 14px;
+        width: 100%;
+        background: transparent;
+        color: var(--violet-300);
+        border: 1px solid var(--violet-300);
+        border-radius: 8px;
+        height: 50px;
+        padding: 0 1.5rem;
+        font-weight: 700;
+        display: block;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-items: center;
+        gap: .8rem;
+        transition: color .2s,background-color .2s;
+        cursor: pointer;
+    }
 }
 
 .button:hover {
